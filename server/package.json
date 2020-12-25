@@ -1,5 +1,5 @@
 {
-  "name": "listing-directory-server-v1",
+  "name": "big-city-server-v1",
   "version": "1.0.0",
   "description": "Listing directory server version 1",
   "main": "index.js",
@@ -20,12 +20,14 @@
   },
   "devDependencies": {
     "@types/body-parser": "^1.19.0",
+    "@types/dotenv": "^8.2.0",
     "@types/express": "^4.17.9",
     "@types/graphql": "^14.5.0",
     "@types/mongodb": "^3.6.3",
     "@types/node": "^14.14.14",
     "@typescript-eslint/eslint-plugin": "^4.11.0",
     "@typescript-eslint/parser": "^4.11.0",
+    "dotenv": "^8.2.0",
     "eslint": "^7.16.0",
     "nodemon": "^2.0.6",
     "ts-node": "^9.1.1",
