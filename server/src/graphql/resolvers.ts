@@ -13,7 +13,6 @@ export const resolvers: IResolvers = {
       return await db.listings.find({}).toArray();
     }
   },
-
   Mutation: {
     deleteListing: async (
       _root: undefined,
@@ -31,5 +30,8 @@ export const resolvers: IResolvers = {
 
       return deleteRes.value;
     }
+  },
+  Listing: {
+    id: (listing: Listing): string => listing._id.toString()
   }
 }
