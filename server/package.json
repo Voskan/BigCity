@@ -7,6 +7,7 @@
     "start": "nodemon ./src/index.ts",
     "build": "tsc -p ./ -t ESNext",
     "prod": "node ./build/index.js",
+    "seed": "ts-node ./temp/seed.ts",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",
