@@ -1,6 +1,6 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { server } from '../../lib/api';
-import { DeleteListingData, DeleteListingVariables, ListingsData } from './types';
+import { DeleteListingData, DeleteListingVariables, Listing, ListingsData } from './types';
 
 const LISTINGS = `
   query Listings {
@@ -31,24 +31,36 @@ interface Props {
 }
 
 export const Listings = ({ title }: Props) => {
+  const [listings, setListings] = useState<Listing[] | null>(null);
+
   const fetchListings = async () => {
     const { data } = await server.fetch<ListingsData>({ query: LISTINGS });
-    console.log(data);
+    setListings(data.listings);
   };
 
-  const deleteListings = async () => {
-    const { data } = await server.fetch<DeleteListingData, DeleteListingVariables>({
+  const deleteListings = async (id: string) => {
+    await server.fetch<DeleteListingData, DeleteListingVariables>({
       query: DELETE_LISTING,
-      variables: { id: "5fe6f7dfc837bc1927ed1589" }
+      variables: { id }
     });
-    console.log(data);
+
+    fetchListings();
   };
+
+  const listingsList = listings?.map((listing) => (
+    <li key={listing.id}>
+      {listing.title}
+      <button onClick={() => deleteListings(listing.id)}>Delete listing</button>
+    </li>
+  ));
 
   return (
     <div>
       <h2>{title}</h2>
       <button onClick={fetchListings}>Get listings</button>
-      <button onClick={deleteListings}>Delete listing</button>
+      <ul>
+        {listingsList}
+      </ul>
     </div>
   )
 };
