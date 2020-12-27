@@ -30,7 +30,7 @@ interface Props {
 }
 
 export const Listings = ({ title }: Props) => {
-  const { data, refetch } = useQuery<ListingsData>(LISTINGS);
+  const { data, loading, error, refetch } = useQuery<ListingsData>(LISTINGS);
   const listings = data ? data.listings : null;
 
   const deleteListings = async (id: string) => {
@@ -48,6 +48,14 @@ export const Listings = ({ title }: Props) => {
       <button onClick={() => deleteListings(listing.id)}>Delete listing</button>
     </li>
   ));
+
+  if (loading) {
+    return <h2>Loading...</h2>
+  }
+
+  if (error) {
+    return <h2>Uh Oh! Something went wrong, please try again later :(</h2>
+  }
 
   return (
     <div>
